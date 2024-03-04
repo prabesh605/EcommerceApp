@@ -1,0 +1,26 @@
+{
+    "categories": [
+      {
+        "id": 1,
+        "name": "Onesies"
+      },
+      {
+        "id": 2,
+        "name": "Pajamas"
+      },
+      {
+        "id": 3,
+        "name": "Bodysuits"
+      },
+      {
+        "id": 4,
+        "name": "Socks"
+      },
+      {
+        "id": 5,
+        "name": "Hats"
+      }
+      
+    ]
+  }
+  
