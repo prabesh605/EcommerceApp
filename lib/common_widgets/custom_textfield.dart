@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-Widget customTextField({String? name, String? hint, ispass = false}) {
+Widget customTextField(
+    {String? name,
+    String? hint,
+    ispass = false,
+    controller,
+    String? errorText}) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 20),
     child: Column(
@@ -11,13 +15,16 @@ Widget customTextField({String? name, String? hint, ispass = false}) {
         "$name".text.color(Colors.red).size(18).make(),
         5.heightBox,
         TextFormField(
+          controller: controller,
           style: const TextStyle(fontSize: 18),
           obscureText: ispass,
+          onChanged: (_) {},
           decoration: InputDecoration(
             hintText: "$hint",
             isDense: true,
             fillColor: Colors.white,
             filled: true,
+            errorText: null,
             border: InputBorder.none,
             focusedBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.red),
@@ -28,7 +35,12 @@ Widget customTextField({String? name, String? hint, ispass = false}) {
               borderRadius: BorderRadius.circular(10), // Set border radius
             ),
           ),
-        ).box.shadowSm.make()
+        ).box.shadowSm.make(),
+        if (errorText != null)
+          Text(
+            errorText,
+            style: const TextStyle(color: Colors.red),
+          ),
       ],
     ),
   );

@@ -1,6 +1,8 @@
 import 'package:ecommerceapp/Views/Profile_Screen/components/details_card.dart';
+import 'package:ecommerceapp/Views/auth_screen/login_screen.dart';
 import 'package:ecommerceapp/consts/images.dart';
 import 'package:ecommerceapp/consts/list.dart';
+import 'package:ecommerceapp/controller/auth_controller.dart';
 import 'package:ecommerceapp/messages/messages.dart';
 import 'package:ecommerceapp/my_orders/my_orders.dart';
 import 'package:ecommerceapp/my_wishlist/my_wishlist.dart';
@@ -44,7 +46,10 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                   OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      await Get.put(AuthController()).signoutMethod(context);
+                      Get.offAll(() => const LoginScreen());
+                    },
                     child: "Logout".text.make(),
                   ),
                 ],
