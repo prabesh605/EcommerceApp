@@ -83,20 +83,27 @@ class _SigninScreenState extends State<SigninScreen> {
                           ),
                           10.widthBox,
                           RichText(
-                              text: const TextSpan(children: [
-                            TextSpan(
-                                text: "I agree to the",
-                                style: TextStyle(color: Colors.black87)),
-                            TextSpan(
-                                text: " term and Condition",
-                                style: TextStyle(color: Colors.red)),
-                            TextSpan(
-                                text: " & ",
-                                style: TextStyle(color: Colors.black87)),
-                            TextSpan(
-                                text: "privacy policy",
-                                style: TextStyle(color: Colors.red)),
-                          ]))
+                            text: const TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: "I agree to the",
+                                  style: TextStyle(color: Colors.black87),
+                                ),
+                                TextSpan(
+                                  text: " term and Condition",
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                                TextSpan(
+                                  text: " & ",
+                                  style: TextStyle(color: Colors.black87),
+                                ),
+                                TextSpan(
+                                  text: "privacy policy",
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                       ourButton(

@@ -25,9 +25,11 @@ const model5 = "assets/images/model5.jpg";
 const yellowGirl = "assets/images/girlinyellow.jpg";
 const blackfashion = "assets/images/black.jpg";
 const manindhoodie = "assets/images/maninhoodie.jpg";
+const profile1 = "assets/images/profile1.jpg";
 const icwoman = "assets/icons/woman.png";
 const icman = "assets/icons/man.png";
 const icbaby = "assets/icons/baby.png";
+
 //woman category
 const ctWomanDress = "assets/images/womandress.jpg";
 const ctwomantops = "assets/images/womantops.jpg";
@@ -49,3 +51,8 @@ const ctfootwear = "assets/images/babyfootwear.jpg";
 const cttsocks = "assets/images/babysocks.jpg";
 const cthats = "assets/images/babyhat.jpg";
 const ctblanket = "assets/images/babyblanket.jpg";
+
+//payment images
+const pyStripe = 'assets/images/stripe.png';
+const pyPaypal = 'assets/images/paypal.png';
+const pyCashOnDelivery = "assets/images/cod.png";

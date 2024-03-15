@@ -16,43 +16,44 @@ class WomanCategory extends StatelessWidget {
           child: Column(
             children: [
               GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: womanCategoryImages.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisExtent: 250,
-                      mainAxisSpacing: 8,
-                      crossAxisSpacing: 8),
-                  itemBuilder: ((context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Get.to(() => CategoryDetails(
-                              title: womanCategorytitles[index],
-                            ));
-                      },
-                      child: Column(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.asset(
-                              womanCategoryImages[index],
-                              height: 150,
-                              width: 200,
-                              fit: BoxFit.cover,
-                            ),
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: womanCategoryImages.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisExtent: 250,
+                    mainAxisSpacing: 8,
+                    crossAxisSpacing: 8),
+                itemBuilder: ((context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      Get.to(() => CategoryDetails(
+                            title: womanCategorytitles[index],
+                          ));
+                    },
+                    child: Column(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.asset(
+                            womanCategoryImages[index],
+                            height: 150,
+                            width: 200,
+                            fit: BoxFit.cover,
                           ),
-                          womanCategorytitles[index].text.size(20).normal.make()
-                        ],
-                      )
-                          .box
-                          .white
-                          .margin(const EdgeInsets.symmetric(horizontal: 4))
-                          .roundedSM
-                          .outerShadowSm
-                          .make(),
-                    );
-                  }))
+                        ),
+                        womanCategorytitles[index].text.size(20).normal.make()
+                      ],
+                    )
+                        .box
+                        .white
+                        .margin(const EdgeInsets.symmetric(horizontal: 4))
+                        .roundedSM
+                        .outerShadowSm
+                        .make(),
+                  );
+                }),
+              ),
             ],
           )),
     );

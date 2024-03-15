@@ -41,6 +41,7 @@ dependencies:
   firebase_auth: ^4.17.6
   firebase_storage: ^11.6.7
   cloud_firestore: ^4.15.6
+  image_picker: ^1.0.7
  
 
 dev_dependencies:
@@ -70,7 +71,7 @@ flutter:
     - assets/
     - assets/images/
     - assets/icons/
-    - lib/services/woman_category.json
+    - lib/services/category_model.json
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

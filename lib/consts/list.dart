@@ -64,3 +64,11 @@ const babyCategoryTitles = [
 
 const profileButtonsList = ["My orders", "My Wishlist", "Messages"];
 const profileButtonsIcon = [icOrder, icWishlist, icMessage];
+
+//payment method list
+const paymentMethodsImg = [pyStripe, pyPaypal, pyCashOnDelivery];
+const paymentMethodsName = [
+  "Stripe",
+  "Paypal",
+  "Cash on delivery",
+];

@@ -2,6 +2,7 @@ import 'package:ecommerceapp/Views/Cart_Screen/cart_screen.dart';
 import 'package:ecommerceapp/Views/Category_screen/category_screen.dart';
 import 'package:ecommerceapp/Views/Home_screen/home_screen.dart';
 import 'package:ecommerceapp/Views/Profile_Screen/profile_screen.dart';
+import 'package:ecommerceapp/common_widgets/exit_dialog.dart';
 import 'package:ecommerceapp/consts/images.dart';
 import 'package:ecommerceapp/controller/home_controller.dart';
 import 'package:flutter/material.dart';
@@ -50,25 +51,37 @@ class _HomeState extends State<Home> {
           ),
           label: "Account"),
     ];
-    return Obx(
-      () => Scaffold(
-          bottomNavigationBar: BottomNavigationBar(
-            currentIndex: controller.currentNavIndex.value,
-            items: navbarItem,
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: Colors.white,
-            selectedItemColor: Colors.red,
-            onTap: (value) {
-              controller.currentNavIndex.value = value;
-            },
-          ),
-          body: Column(
-            children: [
-              Expanded(
-                child: navBody.elementAt(controller.currentNavIndex.value),
-              ),
-            ],
-          )),
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        if (didPop) {
+          return;
+        }
+        showDialog(
+          context: context,
+          builder: (context) => exitDialog(context),
+        );
+      },
+      child: Obx(
+        () => Scaffold(
+            bottomNavigationBar: BottomNavigationBar(
+              currentIndex: controller.currentNavIndex.value,
+              items: navbarItem,
+              type: BottomNavigationBarType.fixed,
+              backgroundColor: Colors.white,
+              selectedItemColor: Colors.red,
+              onTap: (value) {
+                controller.currentNavIndex.value = value;
+              },
+            ),
+            body: Column(
+              children: [
+                Expanded(
+                  child: navBody.elementAt(controller.currentNavIndex.value),
+                ),
+              ],
+            )),
+      ),
     );
   }
 }

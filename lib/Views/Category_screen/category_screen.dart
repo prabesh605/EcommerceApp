@@ -1,4 +1,4 @@
-import 'package:ecommerceapp/Views/Category_screen/category_controller/category_controller.dart';
+import 'package:ecommerceapp/controller/product_controller.dart';
 import 'package:ecommerceapp/Views/Category_screen/categorytype/baby_screen.dart';
 import 'package:ecommerceapp/Views/Category_screen/categorytype/men_screen.dart';
 import 'package:ecommerceapp/Views/Category_screen/categorytype/women_screen.dart';
@@ -12,7 +12,7 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var controller = Get.put(CategoryController());
+    var controller = Get.put(ProductController());
     var navScreens = [
       const WomanCategory(),
       const MenCategory(),
@@ -30,7 +30,7 @@ class CategoryScreen extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Container(
+            SizedBox(
               height: 100,
               // Customize background color
               child: Row(

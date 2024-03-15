@@ -7,6 +7,7 @@ import 'package:velocity_x/velocity_x.dart';
 
 class AuthController extends GetxController {
   final RxBool isCheck = false.obs;
+  var isloading = false.obs;
   //for signup screen
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
@@ -59,7 +60,10 @@ class AuthController extends GetxController {
       'password': password,
       'email': email,
       'imageUrl': '',
-      'id': currentUser!.uid
+      'id': currentUser!.uid,
+      'cart_count': "00",
+      'wishlist_count': "00",
+      'order_count': "00"
     });
   }
 

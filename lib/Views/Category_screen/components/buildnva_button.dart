@@ -1,9 +1,9 @@
-import 'package:ecommerceapp/Views/Category_screen/category_controller/category_controller.dart';
+import 'package:ecommerceapp/controller/product_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 Widget buildNavButton(
-    iconAsset, String label, int index, CategoryController controller) {
+    iconAsset, String label, int index, ProductController controller) {
   return Row(
     children: [
       IconButton(
