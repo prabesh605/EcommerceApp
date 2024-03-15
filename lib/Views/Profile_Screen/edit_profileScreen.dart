@@ -37,17 +37,25 @@ class _EditProfileState extends State<EditProfile> {
                 children: [
                   SizedBox(
                     height: 200,
-                    child: controller.profileImgPath.isEmpty
+                    child: widget.data['imageUrl'] == '' &&
+                            controller.profileImgPath.isEmpty
                         ? Image.asset(
-                            model5,
+                            profile1,
                             width: 180,
                             fit: BoxFit.cover,
                           ).box.roundedFull.clip(Clip.antiAlias).make()
-                        : Image.file(
-                            File(controller.profileImgPath.value),
-                            width: 180,
-                            fit: BoxFit.cover,
-                          ).box.roundedFull.clip(Clip.antiAlias).make(),
+                        : widget.data['imageUrl'] != '' &&
+                                controller.profileImgPath.isEmpty
+                            ? Image.network(
+                                widget.data['imageUrl'],
+                                width: 180,
+                                fit: BoxFit.cover,
+                              ).box.roundedFull.clip(Clip.antiAlias).make()
+                            : Image.file(
+                                File(controller.profileImgPath.value),
+                                width: 180,
+                                fit: BoxFit.cover,
+                              ).box.roundedFull.clip(Clip.antiAlias).make(),
                   ),
                   Positioned(
                     bottom: 50,

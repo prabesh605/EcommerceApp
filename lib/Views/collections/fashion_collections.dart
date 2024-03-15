@@ -5,19 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key, this.title});
+class FashionCollections extends StatelessWidget {
+  const FashionCollections({super.key, this.title});
   final String? title;
 
   @override
-  State<SearchScreen> createState() => _SearchScreenState();
-}
-
-class _SearchScreenState extends State<SearchScreen> {
-  var controller = Get.find<HomeController>();
-
-  @override
   Widget build(BuildContext context) {
+    var controller = Get.find<HomeController>();
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 188, 216, 238),
       appBar: AppBar(
@@ -32,14 +26,14 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
           style: const TextStyle(color: Colors.white),
           onTap: () {
-            Navigator.pop(context);
+            // Navigator.pop(context);
           },
         ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: FutureBuilder(
-          future: FirestoreService.searchProducts(widget.title),
+          future: FirestoreService.getClothesCollection(title!),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (!snapshot.hasData) {
@@ -50,12 +44,12 @@ class _SearchScreenState extends State<SearchScreen> {
               return "No products found".text.makeCentered();
             } else {
               var data = snapshot.data!.docs;
-              var filtered = data
-                  .where((element) => element['p_name']
-                      .toString()
-                      .toLowerCase()
-                      .contains(widget.title!.toLowerCase()))
-                  .toList();
+              // var filtered = data
+              //     .where((element) => element['p_name']
+              //         .toString()
+              //         .toLowerCase()
+              //         .contains(title!.toLowerCase()))
+              //     .toList();
               return GridView(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
@@ -64,7 +58,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     mainAxisExtent: 250,
                     mainAxisSpacing: 8,
                     crossAxisSpacing: 8),
-                children: filtered
+                children: data
                     .mapIndexed(
                       (currentValue, index) => Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -76,14 +70,14 @@ class _SearchScreenState extends State<SearchScreen> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
                               child: Image.network(
-                                filtered[index]['p_imgs'][0],
+                                data[index]['p_imgs'][0],
                                 fit: BoxFit.cover,
                               ),
                             ),
                           ),
                           5.heightBox,
-                          "${filtered[index]['p_name']}".text.semiBold.make(),
-                          "Rs. ${filtered[index]['p_price']}"
+                          "${data[index]['p_name']}".text.semiBold.make(),
+                          "Rs. ${data[index]['p_price']}"
                               .text
                               .color(Colors.red)
                               .bold

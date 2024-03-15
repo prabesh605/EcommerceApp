@@ -100,9 +100,14 @@ class FirestoreService {
 
   //for search
   static searchProducts(title) {
+    return firestore.collection(productsCollection).get();
+  }
+
+  //get new collection, men hoodies, featured etc,
+  static getClothesCollection(String label) {
     return firestore
         .collection(productsCollection)
-        .where('p_name', isLessThanOrEqualTo: title)
+        .where('label', isEqualTo: label)
         .get();
   }
 }

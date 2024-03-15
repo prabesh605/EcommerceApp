@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerceapp/Views/Category_screen/item_details.dart';
 import 'package:ecommerceapp/Views/Home_screen/components/search_screen.dart';
+import 'package:ecommerceapp/Views/collections/fashion_collections.dart';
 import 'package:ecommerceapp/common_widgets/our_button.dart';
 import 'package:ecommerceapp/consts/images.dart';
 import 'package:ecommerceapp/consts/list.dart';
@@ -58,8 +59,12 @@ class HomeScreen extends StatelessWidget {
                             10.heightBox,
                             SizedBox(
                                 width: 180,
-                                child:
-                                    ourButton(text: "Check", onPressed: () {}))
+                                child: ourButton(
+                                    text: "Check",
+                                    onPressed: () {
+                                      Get.to(() => const FashionCollections(
+                                          title: 'fashion'));
+                                    }))
                           ],
                         )),
                   ],
@@ -453,7 +458,11 @@ class HomeScreen extends StatelessWidget {
                         left: 5,
                         child: "New Collection".text.bold.white.size(40).make())
                   ],
-                ),
+                ).onTap(() {
+                  Get.to(() => const FashionCollections(
+                        title: 'new',
+                      ));
+                }),
                 Stack(
                   children: [
                     Align(
@@ -477,17 +486,26 @@ class HomeScreen extends StatelessWidget {
                                   .size(40)
                                   .make())
                         ],
-                      ),
+                      ).onTap(() {
+                        Get.to(() => const FashionCollections(
+                              title: 'men_hoodie',
+                            ));
+                      }),
                     ),
                     //summer sales
                     Align(
-                        alignment: Alignment.bottomLeft,
-                        child: "Summer \nSales"
-                            .text
-                            .bold
-                            .color(Colors.red)
-                            .size(40)
-                            .make()),
+                            alignment: Alignment.bottomLeft,
+                            child: "Summer \nSales"
+                                .text
+                                .bold
+                                .color(Colors.red)
+                                .size(40)
+                                .make())
+                        .onTap(() {
+                      Get.to(() => const FashionCollections(
+                            title: 'summer_sales',
+                          ));
+                    }),
                     //black clothes
                     Positioned(
                       bottom: 0,
@@ -505,7 +523,11 @@ class HomeScreen extends StatelessWidget {
                               left: 45,
                               child: "Black".text.bold.white.size(40).make())
                         ],
-                      ),
+                      ).onTap(() {
+                        Get.to(() => const FashionCollections(
+                              title: 'black',
+                            ));
+                      }),
                     ),
                   ],
                 )
@@ -526,14 +548,15 @@ class HomeScreen extends StatelessWidget {
                 controller: controller.searchController,
                 decoration: const InputDecoration(
                   hintText: 'Search...',
-                  hintStyle: TextStyle(color: Colors.white),
+                  hintStyle: TextStyle(color: Colors.black),
                   border: InputBorder.none,
                 ),
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.black),
                 onSubmitted: (_) {
                   if (controller.searchController.text.isNotEmptyAndNotNull) {
                     Get.to(() =>
                         SearchScreen(title: controller.searchController.text));
+                    controller.searchController.clear();
                   }
                 },
               ),

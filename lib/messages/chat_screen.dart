@@ -7,12 +7,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class ChatScreen extends StatelessWidget {
+class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
 
   @override
+  State<ChatScreen> createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
+  var controller = Get.put(ChatsController());
+
+  @override
   Widget build(BuildContext context) {
-    var controller = Get.put(ChatsController());
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 173, 212, 244),
       appBar: AppBar(
@@ -23,8 +29,7 @@ class ChatScreen extends StatelessWidget {
         children: [
           Expanded(
             child: StreamBuilder(
-                stream: FirestoreService.getChatMessages(
-                    controller.chatDocId.toString()),
+                stream: FirestoreService.getChatMessages(controller.chatDocId),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (!snapshot.hasData) {
