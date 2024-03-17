@@ -12,7 +12,7 @@ class ChatsController extends GetxController {
   var senderName = Get.find<HomeController>().username;
   var currentId = currentUser!.uid;
   var msgController = TextEditingController();
-  dynamic chatDocId;
+  String? chatDocId;
 
   @override
   void onInit() {
@@ -22,42 +22,45 @@ class ChatsController extends GetxController {
 
   getChatId() async {
     isLoading(true);
-    await chats
-        .where('users', isEqualTo: {
-          friendId: null,
-          currentId: null,
-        })
-        .limit(1)
-        .get()
-        .then((QuerySnapshot snapshot) {
-          if (snapshot.docs.isNotEmpty) {
-            chatDocId = snapshot.docs.single.id;
-          } else {
-            chats.add({
-              'created_on': null,
-              'last_msg': '',
-              'users': {friendId: null, currentId: null},
-              'toId': '',
-              'fromId': '',
-              'friend_name': friendName,
-              'sender_name': senderName,
-            }).then((value) {
-              chatDocId = value.id;
-            });
-          }
+    try {
+      final snapshot = await chats
+          .where('users', isEqualTo: {
+            friendId: null,
+            currentId: null,
+          })
+          .limit(1)
+          .get();
+      if (snapshot.docs.isNotEmpty) {
+        chatDocId = snapshot.docs.single.id;
+      } else {
+        final newChatDoc = await chats.add({
+          'created_on': null,
+          'last_msg': '',
+          'users': {friendId: null, currentId: null},
+          'toId': '',
+          'fromId': '',
+          'friend_name': friendName,
+          'sender_name': senderName,
         });
-    isLoading(false);
+        chatDocId = newChatDoc.id;
+      }
+    } catch (e) {
+      print("Error fetching chat ID: $e");
+      // Handle error appropriately
+    } finally {
+      isLoading(false);
+    }
   }
 
-  sendMsg(String msg) {
+  sendMsg(String msg) async {
     if (msg.trim().isNotEmpty) {
-      chats.doc(chatDocId).update({
+      await chats.doc(chatDocId).update({
         'created_on': FieldValue.serverTimestamp(),
         'last_msg': msg,
         'toId': friendId,
         'fromId': currentId,
       });
-      chats.doc(chatDocId).collection(messageCollection).doc().set({
+      await chats.doc(chatDocId).collection(messageCollection).doc().set({
         'created_on': FieldValue.serverTimestamp(),
         'msg': msg,
         'uid': currentId,

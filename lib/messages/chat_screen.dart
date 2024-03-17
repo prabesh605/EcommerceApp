@@ -27,34 +27,43 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
       body: Column(
         children: [
-          Expanded(
-            child: StreamBuilder(
-                stream: FirestoreService.getChatMessages(controller.chatDocId),
-                builder: (BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> snapshot) {
-                  if (!snapshot.hasData) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (snapshot.data!.docs.isEmpty) {
-                    return Center(
-                      child: "Send a message.......".text.make(),
-                    );
-                  } else {
-                    return ListView(
-                      children:
-                          snapshot.data!.docs.mapIndexed((currentValue, index) {
-                        var data = snapshot.data!.docs[index];
-                        return Align(
-                          alignment: data['uid'] == currentUser!.uid
-                              ? Alignment.centerRight
-                              : Alignment.centerLeft,
-                          child: senderBubble(data),
+          Obx(
+            () => controller.isLoading.value
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Expanded(
+                    child: StreamBuilder(
+                    stream: FirestoreService.getChatMessages(
+                        controller.chatDocId.toString()),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot) {
+                      if (!snapshot.hasData) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
                         );
-                      }).toList(),
-                    );
-                  }
-                }),
+                      } else if (snapshot.data!.docs.isEmpty) {
+                        return Center(
+                          child: "Send a messages.....".text.make(),
+                        );
+                      } else {
+                        return ListView(
+                          children: snapshot.data!.docs
+                              .mapIndexed((currentValue, index) {
+                            var data = snapshot.data!.docs[index];
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Align(
+                                  alignment: data['uid'] == currentUser!.uid
+                                      ? Alignment.centerRight
+                                      : Alignment.centerLeft,
+                                  child: senderBubble(data)),
+                            );
+                          }).toList(),
+                        );
+                      }
+                    },
+                  )),
           ),
           Row(
             children: [

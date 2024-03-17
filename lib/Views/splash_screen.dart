@@ -16,24 +16,24 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  // changeScreen() {
-  //   Future.delayed(const Duration(seconds: 3), () {
-  //     Get.off(() => const LoginScreen());
-  //   });
-
-  // }
+  changeScreen() {
+    Future.delayed(const Duration(seconds: 3), () {
+      Get.off(() => const LoginScreen());
+    });
+  }
 
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 3), () {
-      auth.authStateChanges().listen((User? user) {
-        if (user == null && mounted) {
-          Get.off(() => const LoginScreen());
-        } else {
-          Get.off(() => const Home());
-        }
-      });
-    });
+    // Future.delayed(Duration(seconds: 3), () {
+    //   auth.authStateChanges().listen((User? user) {
+    //     if (user == null && mounted) {
+    //       Get.off(() => const LoginScreen());
+    //     } else {
+    //       Get.off(() => const Home());
+    //     }
+    //   });
+    // });
+    changeScreen();
 
     super.initState();
   }

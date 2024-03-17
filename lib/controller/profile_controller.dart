@@ -24,7 +24,7 @@ class ProfileController extends GetxController {
   changeImage(context) async {
     try {
       final img = await ImagePicker()
-          .pickImage(source: ImageSource.gallery, imageQuality: 70);
+          .pickImage(source: ImageSource.gallery, imageQuality: 20);
       if (img == null) return;
       profileImgPath.value = img.path;
     } on PlatformException catch (e) {
